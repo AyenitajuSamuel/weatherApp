@@ -1,0 +1,1 @@
+A real-time weather tracking application built with Python and Django. This app allows users to search for cities and get instant weather data including temperature, humidity, and weather conditions.
