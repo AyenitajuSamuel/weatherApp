@@ -6,6 +6,15 @@
     <title>Weather App</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="city" id="city" placeholder="Enter city">
+        <button type="submit">Search</button>
+    </form>
+    <h2>{{temp}}</h2>
+    <h3>{{city}}</h3>
+    <p>{{description}}</p>
+    <img src="http://openweathermap.org/img/w/{{ icon }}.png" width="100px">
+    <p>{{ day }}</p>
 </body>
 </html> 
