@@ -1,20 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'weatherapp/styles.css' %}">
 </head>
 <body>
-    <form method="POST">
+<div class="weather-container" style="background-image: url('{{ background_image }}');">
+    <form method="POST" class="search-bar">
         {% csrf_token %}
-        <input type="text" name="city" id="city" placeholder="Enter city">
+        <input type="text" name="city" id="city" placeholder="Search city..." required>
         <button type="submit">Search</button>
     </form>
-    <h2>{{temp}}</h2>
-    <h3>{{city}}</h3>
-    <p>{{description}}</p>
-    <img src="http://openweathermap.org/img/w/{{ icon }}.png" width="100px">
-    <p>{{ day }}</p>
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="weather-main">
+        <h1 class="city">{{ city.title }}</h1>
+        <p class="date">{{ day }}</p>
+
+        <div class="temperature">
+            {{ temp }}&deg;C
+        </div>
+        <p class="feels_like">Feels like {{ feel_temp }} &deg; C</p>
+
+        <div class="weather-icon">
+            <img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="Weather icon">
+        </div>
+
+        <p class="description">{{ description }}</p>
+    </div>
+    <div class="weather-details">
+        <div class="card">
+            <p class="label">Humidity</p>
+            <p class="value">{{ humidity }}%</p>
+        </div>
+
+        <div class="card">
+            <p class="label">Wind</p>
+            <p class="value">{{ windspeed }} km/h</p>
+        </div>
+
+        <div class="card">
+            <p class="label">Pressure</p>
+            <p class="value">{{ pressure }}hPa</p>
+        </div>
+    </div>
+</div>
 </body>
-</html> 
+</html>
