@@ -11,7 +11,6 @@ def home(request):
 
     params = {
         'q': city,
-        'appid': 'bf7d64842ff40f509e79d234058c593e',
         'units': 'metric'
     }
 
